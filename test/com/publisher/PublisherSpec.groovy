@@ -3,6 +3,7 @@ package com.publisher
 import spock.lang.Issue
 import spock.lang.Narrative
 import spock.lang.Specification
+import spock.lang.Subject
 import spock.lang.Title
 
 /**
@@ -28,8 +29,6 @@ class PublisherSpec extends Specification {
 
         then:
         1 * subscriber1.receive("event")
-
-        then:
         1 * subscriber2.receive("event")
 
     }
@@ -108,6 +107,7 @@ class PublisherSpec extends Specification {
         def subscriber1 = Mock(Subscriber)
         def subscriber2 = Mock(Subscriber)
 
+        @Subject
         def publisher = new Publisher()
         publisher.subscribers << subscriber1 << subscriber2
 
@@ -119,6 +119,7 @@ class PublisherSpec extends Specification {
 
         then:
         1 * subscriber2.receive("event")
+
     }
 
 }
